@@ -1,0 +1,31 @@
+﻿  game.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\game.c': No such file or directory
+  gf3d_camera.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_camera.c': No such file or directory
+  gf3d_commands.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_commands.c': No such file or directory
+  gf3d_extensions.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_extensions.c': No such file or directory
+  gf3d_matrix.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_matrix.c': No such file or directory
+  gf3d_model.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_model.c': No such file or directory
+  gf3d_pipeline.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_pipeline.c': No such file or directory
+  gf3d_shaders.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_shaders.c': No such file or directory
+  gf3d_swapchain.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_swapchain.c': No such file or directory
+  gf3d_types.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_types.c': No such file or directory
+  gf3d_validation.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_validation.c': No such file or directory
+  gf3d_vector.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_vector.c': No such file or directory
+  gf3d_vgraphics.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_vgraphics.c': No such file or directory
+  gf3d_vqueues.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\gf3d_vqueues.c': No such file or directory
+  simple_logger.c
+c1 : fatal error C1083: Cannot open source file: '..\gf3d\src\simple_logger.c': No such file or directory
+  Generating Code...

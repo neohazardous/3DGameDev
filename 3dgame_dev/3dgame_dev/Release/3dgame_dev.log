@@ -1,0 +1,9 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  gf3d_shaders.c
+  gf3d_vgraphics.c
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(212): error C2039: 'vk_instanc0e_info': is not a member of 'vGraphics'
+  d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(25): note: see declaration of 'vGraphics'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(229): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(292): warning C4090: 'function': different 'const' qualifiers
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(435): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(531): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'

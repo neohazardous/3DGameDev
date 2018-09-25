@@ -1,0 +1,33 @@
+d:\3dgame\3dgame_dev\gf3d\src\game.c:16: gf3d begin
+d:\3dgame\3dgame_dev\gf3d\src\game.c:16: gf3d begin
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:68: Total available instance extensions: 12
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_EXT_debug_report
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_EXT_display_surface_counter
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_get_physical_device_properties2
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_get_surface_capabilities2
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_surface
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_win32_surface
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_device_group_creation
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_external_fence_capabilities
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_external_memory_capabilities
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_KHR_external_semaphore_capabilities
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_NV_external_memory_capabilities
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_extensions.c:81: available instance extension: VK_EXT_debug_utils
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c:172: SDL Vulkan extensions support: VK_KHR_surface
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c:172: SDL Vulkan extensions support: VK_KHR_win32_surface
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:26: discovered 15 validation layers
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_api_dump
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_assistant_layer
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_core_validation
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_device_simulation
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_monitor
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_object_tracker
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_parameter_validation
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_screenshot
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_standard_validation
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_GOOGLE_threading
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_GOOGLE_unique_objects
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_LUNARG_vktrace
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_NV_optimus
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_RENDERDOC_Capture
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c:37: Validation layer available: VK_LAYER_VALVE_steam_overlay

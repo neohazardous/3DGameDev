@@ -1,8 +1,64 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  gf3d_validation.c
-d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c(34): warning C4018: '<': signed/unsigned mismatch
-d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c(50): warning C4090: 'function': different 'const' qualifiers
-d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c(59): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
-d:\3dgame\3dgame_dev\gf3d\src\gf3d_validation.c(65): warning C4018: '<': signed/unsigned mismatch
-game.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  3dgame_dev.vcxproj -> D:\3DGAME\3dgame_dev\gf3d\3dgame_dev.exe
+  vertex.c
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2061: syntax error: identifier 'std'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2059: syntax error: ';'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2449: found '{' at file scope (missing function header?)
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(337): error C2059: syntax error: '}'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2143: syntax error: missing '{' before ':'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2059: syntax error: ':'
+  gf3d_vgraphics.c
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2061: syntax error: identifier 'std'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2059: syntax error: ';'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2449: found '{' at file scope (missing function header?)
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(337): error C2059: syntax error: '}'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2143: syntax error: missing '{' before ':'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2059: syntax error: ':'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(231): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(294): warning C4090: 'function': different 'const' qualifiers
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(437): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_vgraphics.c(533): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
+  gf3d_swapchain.c
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2061: syntax error: identifier 'std'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2059: syntax error: ';'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2449: found '{' at file scope (missing function header?)
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(337): error C2059: syntax error: '}'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2143: syntax error: missing '{' before ':'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2059: syntax error: ':'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(51): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(66): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(84): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(113): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(193): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(222): warning C4047: 'return': 'VkImageView' differs in levels of indirection from 'void *'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(249): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(262): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(278): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_swapchain.c(287): warning C4018: '<': signed/unsigned mismatch
+  gf3d_pipeline.c
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2061: syntax error: identifier 'std'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2059: syntax error: ';'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2449: found '{' at file scope (missing function header?)
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(337): error C2059: syntax error: '}'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2143: syntax error: missing '{' before ':'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2059: syntax error: ':'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_pipeline.c(33): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_pipeline.c(42): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_pipeline.c(54): warning C4018: '<': signed/unsigned mismatch
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_pipeline.c(130): warning C4013: 'newVert' undefined; assuming extern returning int
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_pipeline.c(130): warning C4047: 'initializing': 'myVert *' differs in levels of indirection from 'int'
+  gf3d_commands.c
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2061: syntax error: identifier 'std'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2059: syntax error: ';'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2449: found '{' at file scope (missing function header?)
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(337): error C2059: syntax error: '}'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2143: syntax error: missing '{' before ':'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2059: syntax error: ':'
+d:\3dgame\3dgame_dev\gf3d\src\gf3d_commands.c(61): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
+  game.c
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2061: syntax error: identifier 'std'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2059: syntax error: ';'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(15): error C2449: found '{' at file scope (missing function header?)
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xtr1common(337): error C2059: syntax error: '}'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2143: syntax error: missing '{' before ':'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\cstddef(101): error C2059: syntax error: ':'
+  Generating Code...

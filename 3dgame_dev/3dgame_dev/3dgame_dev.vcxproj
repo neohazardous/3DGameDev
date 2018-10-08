@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -153,6 +153,7 @@
     <ClCompile Include="..\gf3d\src\gf3d_vgraphics.c" />
     <ClCompile Include="..\gf3d\src\gf3d_vqueues.c" />
     <ClCompile Include="..\gf3d\src\simple_logger.c" />
+    <ClCompile Include="..\gf3d\src\vertex.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\gf3d\shaders\basic.frag" />
@@ -160,6 +161,8 @@
     <None Include="..\gf3d\shaders\default.frag" />
     <None Include="..\gf3d\shaders\default.vert" />
     <None Include="..\gf3d\shaders\frag.spv" />
+    <None Include="..\gf3d\shaders\tester.frag" />
+    <None Include="..\gf3d\shaders\tester.vert" />
     <None Include="..\gf3d\shaders\vert.spv" />
     <None Include="..\gf3d\src\Makefile" />
   </ItemGroup>
@@ -179,6 +182,7 @@
     <ClInclude Include="..\gf3d\include\gf3d_vgraphics.h" />
     <ClInclude Include="..\gf3d\include\gf3d_vqueues.h" />
     <ClInclude Include="..\gf3d\include\simple_logger.h" />
+    <ClInclude Include="..\gf3d\include\vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

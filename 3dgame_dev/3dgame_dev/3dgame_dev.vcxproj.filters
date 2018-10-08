@@ -63,6 +63,9 @@
     <ClCompile Include="..\gf3d\src\simple_logger.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\gf3d\src\vertex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\gf3d\src\Makefile">
@@ -84,6 +87,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="..\gf3d\shaders\vert.spv">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="..\gf3d\shaders\tester.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="..\gf3d\shaders\tester.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
@@ -131,6 +140,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\gf3d\include\simple_logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gf3d\include\vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

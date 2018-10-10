@@ -9,6 +9,18 @@
 const int WIDTH = 800;
 const int HEIGHT = 600;
 
+const std::vector<const char*> validationLayers = { "VK_LAYER_LUNARG_standard_validation" };
+
+//add 2 config variables to specify the layers to enable/not enable
+//the ndebug macro is part of the c++ standard and means "not debug"
+#ifdef NDEBUG
+const bool enableValidationLayers = false;
+#else
+const bool enableValidationLayers = true;
+#endif // NDEBUG
+
+
+
 class TriangleRend {
 	
 	//make constants for window creation vs just hard coding the window size
@@ -20,13 +32,6 @@ public:
 		mainLoop();
 		cleanup();
 	}
-/*
-private:
-	void initWindow() {
-
-	}
-	*/
-
 
 	//vulkan objects will be stored as private class members. functions will be used to initiate them
 	//which will be called from the initVulkan function.
@@ -60,13 +65,19 @@ private:
 
 	//cleanup is used to deallocate resources
 	void cleanup() {
-
+		vkDestroyInstance(instance, nullptr);
 		glfwDestroyWindow(window);
 		glfwTerminate();
 
 	}
 
 	void createInstance() {
+
+		//use checkValidationSupport() here in createInstance()
+		if (enableValidationLayers && !checkValidationLayerSupport()) {
+			throw std::runtime_error(" validation layers requested, but they are not available.");
+		}
+
 
 		VkApplicationInfo appInfo = {};
 		appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -86,15 +97,69 @@ private:
 
 		createInfo.enabledExtensionCount = glfwExtCount;
 		createInfo.ppEnabledExtensionNames = glfwExtensions;
-
 		createInfo.enabledLayerCount = 0;
 
-		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
+		VkResult result = vkCreateInstance(&createInfo, nullptr, &instance);
 
-			throw std::runtime_error("failed to create instance");
-
+		//if this check is successful, then vkcreateinstance should not return "VK_ERROR_LAYER_NOT_PRESENT"
+		if (enableValidationLayers) {
+			createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+			createInfo.ppEnabledLayerNames = validationLayers.data();
+		}
+		else 
+		{
+			createInfo.enabledLayerCount = 0;
 		}
 
+		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
+			throw std::runtime_error("failed to create instance");
+		}
+	}
+
+	//setting to get message callback.
+	void setupDebugCallback() {
+		
+		//we create a getrequiredextensions function that will return the required list of extensions
+		std::vector<const char*> getRequiredExtensions() {
+			uint32_t glfwExtensionCount = 0;
+			const char** glfwExtensions;
+			glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+
+			std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+
+			if (enableValidationLayers) {
+				extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+			}
+			return extensions;
+		}
+	}
+	
+	//this function checks if all of the request layers are available
+	bool checkValidationLayerSupport() {
+
+		//first, list all of the available layers using vkenumerateinstancelayerproperties
+		uint32_t layerCount;
+		vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+		
+		std::vector<VkLayerProperties> availableLayers(layerCount);
+		vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+		
+		//check if all the layers in validationLayers exist in availableLayers list.
+		for (const char* layerName : validationLayers) {
+			bool layerFound = false;
+
+			for (const auto& layerProperties : availableLayers) {
+				if (strcmp(layerName, layerProperties.layerName) == 0) { //strcmp compares the 2 variables to see if they match
+					layerFound = true;
+					break;
+				}
+			}
+
+			if (!layerFound) {
+				return false;
+			}
+		}
+		return true;
 	}
 };
 
@@ -112,6 +177,5 @@ int main() {
 		std::cerr << e.what() << std::endl;
 		return EXIT_FAILURE;
 	}
-
 	return EXIT_SUCCESS;
 }

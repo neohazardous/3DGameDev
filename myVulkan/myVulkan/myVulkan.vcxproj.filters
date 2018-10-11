@@ -15,7 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main_Vk.cpp">
+    <ClCompile Include="sample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VULKAN.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ref.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

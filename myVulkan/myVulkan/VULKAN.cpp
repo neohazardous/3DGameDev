@@ -57,6 +57,10 @@ private:
 	VkInstance instance;
 	VkDebugUtilsMessengerEXT callback;
 
+	//we'll have to select a graphics card and store it in a vkphysicaldevice handle thats added as a new class member
+	//this object will be destroyed when vkinstance is destroyed, so we dont need to add anything new to the cleanup function
+	VkPhysicalDevice physDevice = VK_NULL_HANDLE;
+
 	void initWindow() {
 
 		glfwInit();
@@ -70,8 +74,45 @@ private:
 
 		createInstance();
 		setupDebugCallback();
-
+		pickPhysicalDevice();
 	}
+
+	void pickPhysicalDevice() {
+		
+		//listing the gpu is similar to listing extensions & starts with querying just the #
+		uint32_t deviceCount = 0;
+		vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+
+		//if theres 0 devices w/ vulkan support, then there isn't a point in continuing
+		if (deviceCount == 0) {
+			throw std::runtime_error(" failed to find a GPU with Vulkan support");
+		}
+
+		//if we do find something, allocate an array to hold all the vkphysicaldevice handles
+		std::vector<VkPhysicalDevice> devices(deviceCount);
+		vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
+
+		//we check if the physical devices found meet the requirements
+		for (const auto& device : devices) {
+			if (isDeviceSuitable(device)) {
+				physDevice = device;
+				break;
+			}
+		}
+
+		if (physDevice == VK_NULL_HANDLE) {
+			throw std::runtime_error("failed to find a suitable GPU.");
+		}
+	}
+
+	//we need to evaluate the devices to see if they're suitable for what we need to do. 
+	//after all, not all GPUs are equal in ability.
+	bool isDeviceSuitable(VkPhysicalDevice device) {
+
+		return true;
+	}
+
+
 
 	//mainLoop will interate rendering frames until the window is closed
 	void mainLoop() {

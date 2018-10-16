@@ -7,6 +7,7 @@
 #include <cstring>
 //#include <functional> //will be used for a lambda functions in the resource mangement sections 
 #include <cstdlib> //This header provides exit_success/exit_failure macros
+#include <optional>
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -37,6 +38,20 @@ void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT
 		func(instance, callback, pAllocator);
 	}
 }
+
+//anything from drawing to uploading textures requires commands to be submitted to a queue. 
+//there are different types of queues that originate from different queue families and each family of queues allows only a subset of c ommands
+//ex: one queue fam that only allows processing of compute commands. one queue fam that only allows memory transfer related commands
+
+//using find queuefamilies, we look for all queue families we need 
+struct QueueFamilyIndices {
+	std::optional<uint32_t> graphicsFamily;
+
+	bool isComplete() {
+		return graphicsFamily.has_value();
+	}
+};
+
 
 class TriangleRend {
 
@@ -109,9 +124,37 @@ private:
 	//after all, not all GPUs are equal in ability.
 	bool isDeviceSuitable(VkPhysicalDevice device) {
 
-		return true;
+		//we use findQueueFamilies here to ensure tehat the device can process whatever commands we want to use
+		QueueFamilyIndices indices = findQueueFamilies(device);
+		return indices.isComplete();
+
 	}
 
+	//the process of retrieving the list of queue families
+	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) {
+		QueueFamilyIndices indices;
+
+		uint32_t queueFamilyCount = 0;
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+
+		std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+		//we need at least one queuefamily that supports vk_queue_graphics_bit
+		int i = 0;
+		for (const auto& queueFamily : queueFamilies) {
+			if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+				indices.graphicsFamily = i;
+			}
+
+			if (indices.isComplete()) {
+				break;
+			}
+
+			i++;
+		}
+		return indices;
+	}
 
 
 	//mainLoop will interate rendering frames until the window is closed

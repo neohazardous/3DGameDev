@@ -71,6 +71,8 @@ private:
 	GLFWwindow * window;
 	VkInstance instance;
 	VkDebugUtilsMessengerEXT callback;
+	VkDevice device;
+	VkQueue graphicsQueue;
 
 	//we'll have to select a graphics card and store it in a vkphysicaldevice handle thats added as a new class member
 	//this object will be destroyed when vkinstance is destroyed, so we dont need to add anything new to the cleanup function
@@ -90,6 +92,8 @@ private:
 		createInstance();
 		setupDebugCallback();
 		pickPhysicalDevice();
+		createLogicalDevice();
+
 	}
 
 	void pickPhysicalDevice() {
@@ -120,6 +124,56 @@ private:
 		}
 	}
 
+	//the creation of a logical device involves specifying a lot of details in structs again, of which the 1st one will be vkdevicequeuecreateinfo
+	//this struct describes the number of queues we want for a single queue family 
+	void createLogicalDevice() {
+		QueueFamilyIndices indices = findQueueFamilies(physDevice);
+
+		VkDeviceQueueCreateInfo queueCreateInfo = {};
+		queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+		queueCreateInfo.queueFamilyIndex = indices.graphicsFamily.value();
+		queueCreateInfo.queueCount = 1;
+		//currently available drivers will onyl allow you to create a small numbero f queues for each queue family
+		
+		//vulkan lets you assign priorities to queues to influenced the scheduling of command buffer execution
+		//you use floating point numbers between 0.0-1.0. this is required even if theres only 1 queue
+		float queuePriority = 1.0f;
+		queueCreateInfo.pQueuePriorities = &queuePriority;
+
+		//we need to specify the set device features to use
+		VkPhysicalDeviceFeatures deviceFeatures = {};
+
+		///////////creating the logical device////////////
+		//start filling in the main vkdevicecreateinfo structure
+		VkDeviceCreateInfo createInfo = {};
+		createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+
+		//add pointers to the queue creation info & device features structs
+		createInfo.pQueueCreateInfos = &queueCreateInfo;
+		createInfo.queueCreateInfoCount = 1;
+
+		createInfo.pEnabledFeatures = &deviceFeatures;
+
+		//requires you to specify extensions and validation layers. these are device sepcific this time
+		createInfo.enabledExtensionCount = 0;
+		
+		if (enableValidationLayers) {
+			createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+			createInfo.ppEnabledLayerNames = validationLayers.data();
+		}
+		else {
+			createInfo.enabledLayerCount = 0;
+		}
+
+		//now to instantiate the logical device named vkcreatedevice
+		if (vkCreateDevice(physDevice, &createInfo, nullptr, &device) != VK_SUCCESS) {
+			throw std::runtime_error(" failed to create a logical device.");
+		}
+
+		vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
+	}
+
+
 	//we need to evaluate the devices to see if they're suitable for what we need to do. 
 	//after all, not all GPUs are equal in ability.
 	bool isDeviceSuitable(VkPhysicalDevice device) {
@@ -133,6 +187,7 @@ private:
 	//the process of retrieving the list of queue families
 	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) {
 		QueueFamilyIndices indices;
+
 
 		uint32_t queueFamilyCount = 0;
 		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
@@ -167,10 +222,12 @@ private:
 
 	//cleanup is used to deallocate resources
 	void cleanup() {
+		
+		vkDestroyDevice(device, nullptr);
 		if (enableValidationLayers) {
 			DestroyDebugUtilsMessengerEXT(instance, callback, nullptr);
 		}
-
+		
 		vkDestroyInstance(instance, nullptr);
 		glfwDestroyWindow(window);
 		glfwTerminate();

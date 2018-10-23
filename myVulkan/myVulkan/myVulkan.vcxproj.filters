@@ -24,6 +24,9 @@
     <ClCompile Include="ref.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="myVulkan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\libs\glm-0.9.9.2\glm\glm\mat2x2.hpp">

@@ -85,6 +85,7 @@ private:
 	std::vector<VkImage> swapChainImages;
 	VkFormat swapChainImageFormat;
 	VkExtent2D swapChainExtent;
+	std::vector<VkImageView> swapChainImageViews;
 
 	//we'll have to select a graphics card and store it in a vkphysicaldevice handle thats added as a new class member
 	//this object will be destroyed when vkinstance is destroyed, so we dont need to add anything new to the cleanup function
@@ -107,6 +108,7 @@ private:
 		pickPhysicalDevice();
 		createLogicalDevice();
 		CreateSwapChain();
+		createImageViews();
 	}
 
 
@@ -120,6 +122,10 @@ private:
 
 	//cleanup is used to deallocate resources
 	void cleanup() {
+
+		for (auto imageView : swapChainImageViews) {
+			vkDestroyImageView(device, imageView, nullptr);
+		}
 		vkDestroySwapchainKHR(device, swapChain, nullptr);
 		vkDestroyDevice(device, nullptr);
 
@@ -131,7 +137,7 @@ private:
 		vkDestroyInstance(instance, nullptr);
 		glfwDestroyWindow(window);
 		glfwTerminate();
-
+		
 	}
 
 	void createInstance() {
@@ -349,6 +355,35 @@ private:
 
 		swapChainImageFormat = surfaceFormat.format;
 		swapChainExtent = extent;
+	}
+	
+	//have to resize the list to fit all the image views we'll be creating
+	void createImageViews() {
+
+		swapChainImageViews.resize(swapChainImages.size());
+
+		//loop that iterates over all the swapchain images
+		for (size_t i = 0; i < swapChainImages.size(); i++) {
+			VkImageViewCreateInfo createInfo = {};
+			createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+			createInfo.image = swapChainImages[i];
+			//components allows to swizzle the color channels 
+			createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+			createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+			createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+			createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+			//subresourceRange describes what the images purpose is and which part of the image should be accessed
+			createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+			createInfo.subresourceRange.baseMipLevel = 0;
+			createInfo.subresourceRange.levelCount = 1;
+			createInfo.subresourceRange.baseArrayLayer = 0;
+			createInfo.subresourceRange.layerCount = 1;
+			
+			if (vkCreateImageView(device, &createInfo, nullptr, &swapChainImageViews[i]) != VK_SUCCESS) {
+				throw std::runtime_error("FAILED TO CREATE IMAGE VIEWS!");
+			}
+
+		}
 	}
 
 	VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {

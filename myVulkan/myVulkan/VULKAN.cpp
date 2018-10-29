@@ -89,6 +89,8 @@ private:
 	std::vector<VkImageView> swapChainImageViews;
 
 	VkPipelineLayout pipelineLayout;
+	VkRenderPass renderPass;
+	VkPipelineLayout pipelineLayout;
 
 	//we'll have to select a graphics card and store it in a vkphysicaldevice handle thats added as a new class member
 	//this object will be destroyed when vkinstance is destroyed, so we dont need to add anything new to the cleanup function
@@ -112,6 +114,7 @@ private:
 		createLogicalDevice();
 		CreateSwapChain();
 		createImageViews();
+		createRenderPass();
 		createGraphicsPipeline();
 	}
 
@@ -389,6 +392,47 @@ private:
 				throw std::runtime_error("FAILED TO CREATE IMAGE VIEWS!");
 			}
 
+		}
+	}
+
+	//we need to specify how many color and depth buffers there will be, how many sampels to use for each of them, how their contents should be handled throughout the rendering operations. this is all done here
+	void createRenderPass() {
+
+		//well just have a single colour buffer attachment represented by one of the images from the swap chain for now
+		VkAttachmentDescription colorAttachment = {};
+		colorAttachment.format = swapChainImageFormat;
+		colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
+
+		//loadop and storeop determine what to do w/the data in the attachment before and after rendering 
+		colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR; //were looking to use clear op to clear the framebuffer to black before drawing a new frame
+		colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE; //were just looking to get a triangle atm so were going with the store op here
+
+		colorAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+		colorAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+		//storeop/loadop apply to color & depth data, stencilloadop/storeop apply to stencil data
+		//this stuff eals with textures and framebuffers in vulkan. theyre represented by vkimage objs with a certain pixel format. however the layout of the pixels in memory can change based on what youre trying to do
+		colorAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED; //using this means we dont care what previous layout the image was in
+		colorAttachment.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR; //we want the image to be ready for presentation using the swapchain after rendering, which is why we use this for final layout
+
+		/////////////SUBPASSES AND ATTACHMENT REFERENCES/////////////
+		VkAttachmentReference colorAttachmentRef = {};
+		colorAttachmentRef.attachment = 0;//attachment specifies which attachment to ref by its index in the attachment descriptions array.
+		colorAttachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL; //layout specifies which layout we would like the attachment to have during a subpass that uses this ref
+		
+		VkSubpassDescription subpass= {};
+		subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+		subpass.colorAttachmentCount = 1;
+		subpass.pColorAttachments = &colorAttachmentRef;
+		
+		VkRenderPassCreateInfo renderPassInfo = {};
+		renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+		renderPassInfo.attachmentCount = 1;
+		renderPassInfo.pAttachments = &colorAttachment;
+		renderPassInfo.subpassCount = 1;
+		renderPassInfo.pSubpasses = &subpass;
+
+		if (vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass) != VK_SUCCESS) {
+			throw std::runtime_error("FAILED TO CREATE RENDER PASS");
 		}
 	}
 

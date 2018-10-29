@@ -74,21 +74,25 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2\glm;D:\3DGAME\myVulkan\libs\include;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\VulkanSDK\1.1.82.1\Lib32;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\lib\x86;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <OutDir>.</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2\glm;D:\3DGAME\myVulkan\libs\include;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\VulkanSDK\1.1.82.1\Lib32;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\lib\x86;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <OutDir>.</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2\glm;D:\3DGAME\myVulkan\libs\include;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\VulkanSDK\1.1.82.1\Lib32;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\lib\x86;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <OutDir>.</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2\glm;D:\3DGAME\myVulkan\libs\include;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\VulkanSDK\1.1.82.1\Lib32;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\lib\x86;D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\lib\x86;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <OutDir>.</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -189,6 +193,11 @@
     <ClInclude Include="..\libs\glm-0.9.9.2\glm\glm\vec2.hpp" />
     <ClInclude Include="..\libs\glm-0.9.9.2\glm\glm\vec3.hpp" />
     <ClInclude Include="..\libs\glm-0.9.9.2\glm\glm\vec4.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\compile.bat" />
+    <None Include="shader_base.frag" />
+    <None Include="shader_base.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

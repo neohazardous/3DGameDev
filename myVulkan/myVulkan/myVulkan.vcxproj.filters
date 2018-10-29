@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{649e4c25-b8a0-47a4-9657-4a9dac7ee8ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample.cpp">
@@ -77,5 +80,16 @@
     <ClInclude Include="..\libs\glfw-3.2.1\glfw-3.2.1\include\GLFW\glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\compile.bat">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shader_base.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shader_base.frag">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

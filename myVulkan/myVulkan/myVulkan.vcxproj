@@ -196,6 +196,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compile.bat" />
+    <None Include="shaders\shader_base.frag" />
+    <None Include="shaders\shader_base.vert" />
     <None Include="shader_base.frag" />
     <None Include="shader_base.vert" />
   </ItemGroup>

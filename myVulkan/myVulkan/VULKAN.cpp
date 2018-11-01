@@ -32,7 +32,7 @@ const std::vector<const char*> deviceExtensions = {
 const bool enableValidationLayers = false;
 #else
 const bool enableValidationLayers = true;
-#endif // NDEBUG
+#endif 
 
 
 VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pCallback) {
@@ -60,6 +60,7 @@ void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT
 struct QueueFamilyIndices {
 	std::optional<uint32_t> graphicsFamily;
 	std::optional<uint32_t> presentFamily;
+
 	bool isComplete() {
 		return graphicsFamily.has_value() && presentFamily.has_value();
 	}
@@ -143,8 +144,7 @@ private:
 	VkRenderPass renderPass;
 	VkPipelineLayout pipelineLayout;
 	VkPipeline graphicsPipeline;
-
-
+	
 	VkCommandPool commandPool;
 
 	VkBuffer vertexBuffer;
@@ -163,7 +163,6 @@ private:
 
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		//glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 		window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan", nullptr, nullptr);
 		glfwSetWindowUserPointer(window, this);
@@ -193,8 +192,7 @@ private:
 		createSyncObjects();
 
 	}
-
-
+	
 	//mainLoop will interate rendering frames until the window is closed
 	void mainLoop() {
 
@@ -444,8 +442,8 @@ private:
 		uint32_t imageCount = swapchainSupport.capabilities.minImageCount + 1;
 		if (swapchainSupport.capabilities.maxImageCount > 0 && imageCount > swapchainSupport.capabilities.maxImageCount) {
 			imageCount = swapchainSupport.capabilities.maxImageCount;
-			//val 0 for maximagecount means theres no limit besides memory requirements
 		}
+
 		//creating swapchain obj requires filling in a large structure
 		VkSwapchainCreateInfoKHR createInfo = {};
 		createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
@@ -1201,9 +1199,7 @@ int main() {
 	TriangleRend app;
 
 	try {
-
 		app.run();
-
 	}
 
 	catch (const std::exception& e) {

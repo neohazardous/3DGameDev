@@ -171,11 +171,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_matrix.c" />
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_mesh.c" />
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_model.c" />
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_obj_load.c" />
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_texture.c" />
     <ClCompile Include="myVulkan.cpp" />
     <ClCompile Include="ref.cpp" />
     <ClCompile Include="sample.cpp" />

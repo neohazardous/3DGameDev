@@ -30,21 +30,6 @@
     <ClCompile Include="myVulkan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_matrix.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_mesh.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_model.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_obj_load.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\DjCode\gf3d\src\gf3d_texture.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\libs\glm-0.9.9.2\glm\glm\mat2x2.hpp">

@@ -1,7 +1,9 @@
 #define GLFW_INCLUDE_VULKAN
+#define GLM_FORCE_RADIANS
 #include <GLFW/glfw3.h> //this way GLFW will include its own definitions and automatically load the Vulkan header
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <iostream>
 #include <fstream>
@@ -13,6 +15,7 @@
 #include <array>
 #include <optional>
 #include <set>
+#include <chrono>
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -103,12 +106,19 @@ struct Vertex {
 	}
 };
 
+struct UniformBufferObject {
+	glm::mat4 model;
+	glm::mat4 view;
+	glm::mat4 proj;
+} ubo;
+
+
 //vertices; manipulate these for mod vertex data
 const std::vector<Vertex> vertices = {
-	{ { -0.5f, -0.5f },{ 1.0f, 1.0f, 1.0f } },
-{ { 0.5f, -0.5f },{ 1.0f, 1.0f, 1.0f } },
-{ { 0.5f, 0.5f },{ 0.0f, 1.0f, 1.0f } },
-{ { -0.5f, 0.5f },{ 0.0f, 0.0f, 1.0f } }
+	{ { -0.5f, -0.5f },{ 1.0f, 0.0f, 0.0f } },
+	{ { 0.5f, -0.5f },{ 1.0f, 1.0f, 0.7f } }, //coloooour
+	{ { 0.5f, 0.5f },{ 0.0f, 0.0f, 1.0f } },
+	{ { -0.5f, 0.5f },{ 1.0f, 1.0f, 1.0f } }
 };
 //indices represent the contents of the index buffer
 const std:: vector<uint16_t> indices = {
@@ -158,13 +168,19 @@ private:
 	VkBuffer indexBuffer;
 	VkDeviceMemory indexBufferMemory;
 
+	std::vector<VkBuffer> uniformBuffers;
+	std::vector<VkDeviceMemory> uniformBuffersMemory;
+
 	std::vector<VkCommandBuffer> commandBuffers;
+
 	std::vector<VkSemaphore> imageAvailableSemaphores;
 	std::vector<VkSemaphore> renderFinishedSemaphores;
 	std::vector<VkFence> inFlightFences;
 	size_t currentFrame = 0;
 
 	bool framebufferResized = false;
+
+	VkDescriptorSetLayout descriptorSetLayout;
 	
 	void initWindow() {
 
@@ -191,11 +207,13 @@ private:
 		CreateSwapChain();
 		createImageViews();
 		createRenderPass();
+		createDescriptorSetLayout();
 		createGraphicsPipeline();
 		createFramebuffers();
 		createCommandPool();
 		createVertexBuffer();
 		createIndexBuffer();
+		createUniformBuffers();
 		createCommandBuffers();
 		createSyncObjects();
 
@@ -236,12 +254,20 @@ private:
 
 		cleanupSwapChain();
 
+		vkDestroyDescriptorSetLayout(device, descriptorSetLayout, nullptr);
+
+		for (size_t i = 0; i < swapChainImages.size(); i++) {
+			vkDestroyBuffer(device, uniformBuffers[i], nullptr);
+			vkFreeMemory(device, uniformBufferMemory[i], nullptr);
+
+		}
+
 		vkDestroyBuffer(device, indexBuffer, nullptr);
 		vkFreeMemory(device, indexBufferMemory, nullptr);
-		
+
 		vkDestroyBuffer(device, vertexBuffer, nullptr);
 		vkFreeMemory(device, vertexBufferMemory, nullptr);
-		
+
 		for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
 			vkDestroySemaphore(device, renderFinishedSemaphores[i], nullptr);
 			vkDestroySemaphore(device, imageAvailableSemaphores[i], nullptr);
@@ -521,6 +547,28 @@ private:
 		}
 	}
 
+	void createDescriptorSetLayout() {
+
+		VkDescriptorSetLayoutBinding uboLayoutBinding = {};
+		uboLayoutBinding.binding = 0;
+		uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		uboLayoutBinding.descriptorCount = 1;
+		//we need to specify in which shader stages the descriptor is going to be referenced; so were only refing the descriptor from the vert shader
+		uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+		//pimmutablesamplers is only relevant for image sampling related descriptors
+		uboLayoutBinding.pImmutableSamplers = nullptr;
+
+		VkDescriptorSetLayoutCreateInfo layoutInfo = {};
+		layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+		layoutInfo.bindingCount = 1;
+		layoutInfo.pBindings = &uboLayoutBinding;
+
+		if (vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSetLayout) != VK_SUCCESS) {
+			throw  std::runtime_error("FAILED TO CREATE DESCRIPTOR SET LAYOUT");
+		}
+
+	}
+
 	//we need to specify how many color and depth buffers there will be, how many sampels to use for each of them, how their contents should be handled throughout the rendering operations. this is all done here
 	void createRenderPass() {
 
@@ -704,8 +752,8 @@ private:
 		/////////PIPELINE LAYOUT////////
 		VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
 		pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-		pipelineLayoutInfo.setLayoutCount = 0;
-		pipelineLayoutInfo.pushConstantRangeCount = 0;
+		pipelineLayoutInfo.setLayoutCount = 1;
+		pipelineLayoutInfo.pSetLayouts = &descriptorSetLayout;
 
 		/*//probably optional
 		pipelineLayoutInfo.pPushConstantRanges = nullptr;
@@ -784,7 +832,7 @@ private:
 	}
 
 	void createVertexBuffer() {
-		VkDeviceSize bufferSize = sizeof(indices[0]) * indices.size();
+		VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
 
 		VkBuffer stagingBuffer;
 		VkDeviceMemory stagingBufferMemory;
@@ -792,7 +840,7 @@ private:
 
 		void* data;
 		vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
-		memcpy(data, indices.data(), (size_t)bufferSize);
+		memcpy(data, vertices.data(), (size_t)bufferSize);
 		vkUnmapMemory(device, stagingBufferMemory);
 
 		createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, vertexBuffer, vertexBufferMemory);
@@ -853,6 +901,19 @@ private:
 		vkDestroyBuffer(device, stagingBuffer, nullptr);
 		vkFreeMemory(device, stagingBufferMemory, nullptr);
 	}
+
+	void createUniformBuffer() {
+
+		VkDeviceSize bufferSize = sizeof(UniformBufferObject);
+
+		uniformBuffers.resize(swapChainImages.size());
+		uniformBuffersMemory.resize(swapChainImages.size());
+
+		for (size_t i = 0; i < swapChainImages.size(); i++) {
+			createBuffer(bufferSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, uniformBuffers[i], uniformBuffersMemory[i]);
+		}
+	}
+	
 
 	void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory) {
 		VkBufferCreateInfo bufferInfo = {};
@@ -1007,6 +1068,29 @@ private:
 		}
 	}
 
+	//this function is for handling the movement of geometry within vulkan; the chrono library gives functions to do precise timekeeping 
+	//for exanoke, we use it foor rotating a geometry at 90 degrees/s regardless of frame rate
+	void updateUniformBuffer(uint32_t currentImage) {
+
+		static auto startTime = std::chrono::high_resolution_clock::now();
+
+		auto currentTime = std::chrono::high_resolution_clock::now();
+		float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+		UniformBufferObject ubo = {};
+		ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		//glm::rotate takes an existing transofmration, rotation angle, & rotation axis as parameters. glm::mat4 constructor returns an identity matrix. using a rotation angle of time*glm::radians accomplishes the purpose of rotation 90deg/s
+
+		ubo.view = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 10.0f);
+		//weve chosen a perspective projection with a 45deg vertical fieldofview. other paramaeters are the aspect ratio, near & far view planes. its important to use the current swapchain extent to calculate the aspectratio to take
+		//into account the new widdth & height of the window after a resize.
+		ubo.proj[1][1] *= 1;
+		void* data;
+		vkMapMemory(device, uniformBuffersMemory[currentImage], 0, sizeof(ubo), 0, &data);
+		memcpy(data, &ubo, sizeof(ubo));
+		vkUnmapMemory(device, uniformBuffersMemory[currentImage]);
+	}
+
 	//drawframe is called from the mainloop to put the triangle on the screen
 	void drawFrame() {
 
@@ -1023,6 +1107,9 @@ private:
 		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
 			throw std::runtime_error("failed to acquire swap chain image!");
 		}
+
+		updateUniformBuffer(imageIndex);
+
 
 		//queue submission & synchronization is configured through parameters in the vksubmitinfo structure
 		VkSubmitInfo submitInfo = {};

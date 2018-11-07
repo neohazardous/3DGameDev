@@ -188,6 +188,8 @@ private:
 	std::vector<VkDescriptorSet> descriptorSets;
 
 	VkImage textureImage;
+	VkImageView textureImageView;
+	VkSampler textureSampler;
 	VkDeviceMemory textureImageMemory;
 
 	void initWindow() {
@@ -219,6 +221,11 @@ private:
 		createGraphicsPipeline();
 		createFramebuffers();
 		createCommandPool();
+		
+		createTextureImage(); //
+		createTextureImageView(); 
+		createTextureSampler(); //
+
 		createVertexBuffer();
 		createIndexBuffer();
 		createUniformBuffers();
@@ -226,9 +233,7 @@ private:
 		createDescriptorSets();
 		createCommandBuffers();
 		createSyncObjects();
-		createTextureImage();
-
-
+		
 	}
 	
 	//mainLoop will interate rendering frames until the window is closed
@@ -265,6 +270,9 @@ private:
 	void cleanup() {
 
 		cleanupSwapChain();
+		
+		vkDestroySampler(device, textureSampler, nullptr);
+		vkDestroyImageView(device, textureImageView, nullptr);
 
 		vkDestroyImage(device, textureImage, nullptr);
 		vkFreeMemory(device, textureImageMemory, nullptr);
@@ -440,7 +448,10 @@ private:
 			queueCreateInfo.pQueuePriorities = &queuePriority;
 			queueCreateInfos.push_back(queueCreateInfo);
 		}
+
 		VkPhysicalDeviceFeatures deviceFeatures = {};
+		deviceFeatures.samplerAnisotropy = VK_TRUE;
+
 		VkDeviceCreateInfo createInfo = {};
 		createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 
@@ -534,31 +545,10 @@ private:
 
 	//have to resize the list to fit all the image views we'll be creating
 	void createImageViews() {
-
 		swapChainImageViews.resize(swapChainImages.size());
 
-		//loop that iterates over all the swapchain images
-		for (size_t i = 0; i < swapChainImages.size(); i++) {
-			VkImageViewCreateInfo createInfo = {};
-			createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-			createInfo.image = swapChainImages[i];
-			createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-			createInfo.format = swapChainImageFormat;
-			//components allows to swizzle the color channels 
-			createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
-			createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
-			createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
-			createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
-			//subresourceRange describes what the images purpose is and which part of the image should be accessed
-			createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-			createInfo.subresourceRange.baseMipLevel = 0;
-			createInfo.subresourceRange.levelCount = 1;
-			createInfo.subresourceRange.baseArrayLayer = 0;
-			createInfo.subresourceRange.layerCount = 1;
-
-			if (vkCreateImageView(device, &createInfo, nullptr, &swapChainImageViews[i]) != VK_SUCCESS) {
-				throw std::runtime_error("FAILED TO CREATE IMAGE VIEWS!");
-			}
+		for (uint32_t i = 0; i < swapChainImages.size(); i++) {
+			swapChainImageViews[i] = createImageView(swapChainImages[i], swapChainImageFormat);
 		}
 	}
 
@@ -877,6 +867,56 @@ private:
 		vkFreeMemory(device, textureImageMemory, nullptr);
 
 	}
+
+	void createTextureImageView() {
+
+	}
+
+	void createTextureSampler() {
+		VkSamplerCreateInfo samplerInfo = {};
+		samplerInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
+		samplerInfo.magFilter = VK_FILTER_LINEAR;
+		samplerInfo.minFilter = VK_FILTER_LINEAR;
+
+		//addresssing the mode can be specified per axis using the addressmode fields. note that the axes are u,v,w instead of x,y,z. 
+		//mode_repeat will repeat the texture when going beyond the image dimensions
+		samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+		samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+		samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+		//these 2 fields specify is anisotropic filtering should be used. no reason to not use this unless performance is a concern.
+		samplerInfo.anisotropyEnable = VK_TRUE;
+		samplerInfo.maxAnisotropy = 16;
+		//borderColor specifies what colour to return when sampling beyond the image with a clamp to border addressing mode
+		samplerInfo.borderColor = VK_BORDER_COLOR_INT_TRANSPARENT_BLACK;
+		//if comparison function is enabled, then texels will first be compared to a vaue and the result of that comparison is used in filtering operations.
+		samplerInfo.compareEnable = VK_FALSE;
+		samplerInfo.compareOp = VK_COMPARE_OP_ALWAYS;
+
+		if (vkCreateSampler(device, &samplerInfo, nullptr, &textureSampler) != VK_SUCCESS) {
+			throw std::runtime_error("FAILED TO CREATE TEXTURE SAMPLER");
+		}
+	}
+
+	VkImageView createImageView(VkImage image, VkFormat format) {
+		VkImageViewCreateInfo viewInfo = {};
+		viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+		viewInfo.image = image;
+		viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+		viewInfo.format = format;
+		viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		viewInfo.subresourceRange.baseMipLevel = 0;
+		viewInfo.subresourceRange.levelCount = 1;
+		viewInfo.subresourceRange.baseArrayLayer = 0;
+		viewInfo.subresourceRange.layerCount = 1;
+
+		VkImageView imageView;
+		if (vkCreateImageView(device, &viewInfo, nullptr, &imageView) != VK_SUCCESS) {
+			throw std::runtime_error("failed to create texture image view!");
+		}
+
+		return imageView;
+	}
+
 
 	//image objs will make it easier & faster to retrieve colours by allowing su to use 2d coordinates for one. pixels within an image obj are known as texels and well use that name from this point on.
 	void createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory) {
@@ -1483,8 +1523,12 @@ void createDescriptorSets() {
 			SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device);
 			swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
 		}
+
+		VkPhysicalDeviceFeatures supportedFeatures;
+		vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
+
 		//verifying that the extension is available
-		return indices.isComplete() && extensionsSupported && swapChainAdequate;
+		return indices.isComplete() && extensionsSupported && swapChainAdequate && supportedFeatures.samplerAnisotropy;
 	}
 
 	bool checkDeviceExtSupport(VkPhysicalDevice device) {

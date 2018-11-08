@@ -1,8 +1,3 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  myVulkan.cpp
-  ref.cpp
-  sample.cpp
   VULKAN.cpp
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   myVulkan.vcxproj -> D:\3DGAME\myVulkan\myVulkan\.\myVulkan.exe

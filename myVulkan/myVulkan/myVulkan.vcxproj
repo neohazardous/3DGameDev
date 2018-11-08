@@ -101,7 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;D:\3DGAME\myVulkan\libs\tinyobjloader-master\tinyobjloader-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;D:\3DGAME\myVulkan\libs\tinyobjloader-master\tinyobjloader-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -137,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;D:\3DGAME\myVulkan\libs\tinyobjloader-master\tinyobjloader-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -158,7 +158,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\3DGAME\myVulkan\libs\SDL2_image-2.0.3\include;D:\3DGAME\myVulkan\libs\SDL2_mixer-2.0.2\include;D:\3DGAME\myVulkan\libs\SDL2_ttf-2.0.14\include;D:\3DGAME\myVulkan\libs\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\VulkanSDK\1.1.82.1\Include;D:\3DGAME\myVulkan\libs\glm-0.9.9.2;D:\3DGAME\myVulkan\libs\glfw-3.2.1.bin.WIN32\glfw-3.2.1.bin.WIN32\include;D:\3DGAME\myVulkan\libs\stb-master\stb-master;D:\3DGAME\myVulkan\libs\tinyobjloader-master\tinyobjloader-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -194,6 +194,7 @@
     <ClInclude Include="..\libs\glm-0.9.9.2\glm\glm\vec3.hpp" />
     <ClInclude Include="..\libs\glm-0.9.9.2\glm\glm\vec4.hpp" />
     <ClInclude Include="..\libs\stb-master\stb-master\stb_image.h" />
+    <ClInclude Include="..\libs\tinyobjloader-master\tinyobjloader-master\tiny_obj_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compile.bat" />
@@ -201,6 +202,9 @@
     <None Include="shaders\shader_base.vert" />
     <None Include="shader_base.frag" />
     <None Include="shader_base.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="models\merch.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

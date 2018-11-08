@@ -16,6 +16,9 @@
     <Filter Include="shaders">
       <UniqueIdentifier>{649e4c25-b8a0-47a4-9657-4a9dac7ee8ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="models">
+      <UniqueIdentifier>{6a2d361f-5f02-423f-99fd-95fa0e3a2273}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample.cpp">
@@ -83,6 +86,9 @@
     <ClInclude Include="..\libs\stb-master\stb-master\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\libs\tinyobjloader-master\tinyobjloader-master\tiny_obj_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compile.bat">
@@ -100,5 +106,10 @@
     <None Include="shaders\shader_base.vert">
       <Filter>shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="models\merch.obj">
+      <Filter>models</Filter>
+    </Object>
   </ItemGroup>
 </Project>
